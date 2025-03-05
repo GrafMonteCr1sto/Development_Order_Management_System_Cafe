@@ -1,15 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Подтверждение удаления заказа</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}?v=3">
 </head>
 <body>
-    <h1>Вы уверены, что хотите удалить заказ №{{ order.id }}?</h1>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Удалить</button>
-    </form>
-    <br>
-    <a href="{% url 'order_list' %}">Назад к списку заказов</a>
+    <header>
+        <h1>Система управления заказами</h1>
+    </header>
+    <nav>
+        <a href="{% url 'order_list' %}" class="btn btn-link">Назад к списку заказов</a>
+    </nav>
+    <div class="container">
+        <h1>Вы уверены, что хотите удалить заказ №{{ order.id }}?</h1>
+        <form method="post" class="mb-3">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link">Удалить</button>
+        </form>
+        <a href="{% url 'order_list' %}" class="btn btn-link">Назад к списку заказов</a>
+    </div>
 </body>
 </html>

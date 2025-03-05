@@ -1,42 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Список заказов</title>
+    <title>Система управления заказами</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}?v=3">
 </head>
 <body>
-    <h1>Список заказов</h1>
-    <form method="get" action="{% url 'order_list' %}">
-        <input type="text" name="q" placeholder="Номер стола или статус">
-        <button type="submit">Поиск</button>
-    </form>
-    <br>
-    <a href="{% url 'order_create' %}">Добавить заказ</a>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Номер стола</th>
-            <th>Блюда</th>
-            <th>Общая стоимость</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-        {% for order in orders %}
-        <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.table_number }}</td>
-            <td>{{ order.items|safe }}</td>
-            <td>{{ order.total_price }}</td>
-            <td>{{ order.get_status_display }}</td>
-            <td>
-                <a href="{% url 'order_update' order.id %}">Изменить</a>
-                <a href="{% url 'order_delete' order.id %}">Удалить</a>
-                <a href="{% url 'change_status' order.id 'waiting' %}">В ожидании</a>
-                <a href="{% url 'change_status' order.id 'ready' %}">Готово</a>
-                <a href="{% url 'change_status' order.id 'paid' %}">Оплачено</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <a href="{% url 'revenue' %}">Расчет выручки</a>
+    <header>
+        <h1>Система управления заказами</h1>
+    </header>
+    <nav>
+        <a href="{% url 'order_create' %}" class="btn btn-link">Добавить заказ</a>
+        <a href="{% url 'revenue' %}" class="btn btn-link">Расчет выручки</a>
+    </nav>
+    <div class="container">
+        <h1>Список заказов</h1>
+        <form method="get" action="{% url 'order_list' %}" class="mb-3">
+            <div class="form-group">
+                <input type="text" name="q" value="{{ query }}" placeholder="Номер стола или статус" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-link">Поиск</button>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Номер стола</th>
+                    <th>Блюда</th>
+                    <th>Общая стоимость</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.table_number }}</td>
+                    <td>{{ order.items|safe }}</td>
+                    <td>{{ order.total_price }}</td>
+                    <td>{{ order.get_status_display }}</td>
+                    <td>
+                        <a href="{% url 'order_update' order.id %}" class="btn btn-link">Изменить</a>
+                        <a href="{% url 'order_delete' order.id %}" class="btn btn-link">Удалить</a>
+                        <a href="{% url 'change_status' order.id 'waiting' %}" class="btn btn-link">В ожидании</a>
+                        <a href="{% url 'change_status' order.id 'ready' %}" class="btn btn-link">Готово</a>
+                        <a href="{% url 'change_status' order.id 'paid' %}" class="btn btn-link">Оплачено</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

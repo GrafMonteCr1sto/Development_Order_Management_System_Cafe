@@ -1,11 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Расчет выручки</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}?v=3">
 </head>
 <body>
-    <h1>Общая выручка: {{ total_revenue }}</h1>
-    <br>
-    <a href="{% url 'order_list' %}">Назад к списку заказов</a>
+    <header>
+        <h1>Система управления заказами</h1>
+    </header>
+    <nav>
+        <a href="{% url 'order_create' %}" class="btn btn-link">Добавить заказ</a>
+        <a href="{% url 'order_list' %}" class="btn btn-link">Назад к списку заказов</a>
+    </nav>
+    <div class="container">
+        <h1>Общая выручка: {{ total_revenue }}</h1>
+    </div>
 </body>
 </html>
