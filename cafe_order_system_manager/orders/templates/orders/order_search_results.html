@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Список заказов</title>
+    <title>Результаты поиска заказов</title>
 </head>
 <body>
-    <h1>Список заказов</h1>
+    <h1>Результаты поиска заказов</h1>
     <form method="get" action="{% url 'order_list' %}">
-        <input type="text" name="q" placeholder="Номер стола или статус">
+        <input type="text" name="q" value="{{ query }}" placeholder="Номер стола или статус">
         <button type="submit">Поиск</button>
     </form>
     <br>
-    <a href="{% url 'order_create' %}">Добавить заказ</a>
+    <a href="{% url 'order_list' %}">Назад к списку заказов</a>
     <table>
         <tr>
             <th>ID</th>
@@ -37,6 +37,5 @@
         </tr>
         {% endfor %}
     </table>
-    <a href="{% url 'revenue' %}">Расчет выручки</a>
 </body>
 </html>

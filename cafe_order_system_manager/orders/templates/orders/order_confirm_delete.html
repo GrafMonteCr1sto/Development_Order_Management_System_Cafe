@@ -1,4 +1,3 @@
-<!-- orders/templates/orders/order_confirm_delete.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,7 @@
         {% csrf_token %}
         <button type="submit">Удалить</button>
     </form>
-    <a href="{% url 'order_list' %}">Отмена</a>
+    <br>
+    <a href="{% url 'order_list' %}">Назад к списку заказов</a>
 </body>
 </html>
