@@ -1,0 +1,15 @@
+<!-- orders/templates/orders/order_confirm_delete.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Подтверждение удаления заказа</title>
+</head>
+<body>
+    <h1>Вы уверены, что хотите удалить заказ №{{ order.id }}?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+    <a href="{% url 'order_list' %}">Отмена</a>
+</body>
+</html>

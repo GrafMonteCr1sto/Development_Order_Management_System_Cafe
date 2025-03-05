@@ -1,0 +1,42 @@
+<!-- orders/templates/orders/order_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список заказов</title>
+</head>
+<body>
+    <h1>Список заказов</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Номер стола или статус">
+        <button type="submit">Поиск</button>
+    </form>
+    <a href="{% url 'order_create' %}">Добавить заказ</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Номер стола</th>
+            <th>Блюда</th>
+            <th>Общая стоимость</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.table_number }}</td>
+            <td>{{ order.items|safe }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>
+                <a href="{% url 'order_update' order.id %}">Изменить</a>
+                <a href="{% url 'order_delete' order.id %}">Удалить</a>
+                <a href="{% url 'change_status' order.id 'waiting' %}">В ожидании</a>
+                <a href="{% url 'change_status' order.id 'ready' %}">Готово</a>
+                <a href="{% url 'change_status' order.id 'paid' %}">Оплачено</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'revenue' %}">Расчет выручки</a>
+</body>
+</html>

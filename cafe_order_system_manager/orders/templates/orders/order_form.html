@@ -1,0 +1,15 @@
+<!-- orders/templates/orders/order_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма заказа</title>
+</head>
+<body>
+    <h1>Форма заказа</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+</body>
+</html>
